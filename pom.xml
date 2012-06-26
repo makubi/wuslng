@@ -105,6 +105,11 @@
 			<artifactId>joda-time</artifactId>
 			<version>${jodatime.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>at.makubi.webuntis</groupId>
+			<artifactId>model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>wuslng</finalName>
