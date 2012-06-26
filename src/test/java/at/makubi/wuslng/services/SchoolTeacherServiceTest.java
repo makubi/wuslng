@@ -17,8 +17,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import at.makubi.webuntis.model.SchoolTeacher;
-import at.makubi.wuslng.UntisWsClient;
 import at.makubi.wuslng.services.SchoolTeacherService;
+import at.makubi.wuslng.untiswsclient.UntisWsClient;
 
 import com.sun.jersey.api.Responses;
 

@@ -1,5 +1,7 @@
-package at.makubi.wuslng;
+package at.makubi.wuslng.untiswsclient;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,10 +10,31 @@ import org.springframework.stereotype.Component;
 import at.makubi.webuntis.model.SchoolClass;
 import at.makubi.webuntis.model.SchoolTeacher;
 
+import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
+import com.googlecode.jsonrpc4j.ProxyUtil;
+
 @Component
 public class UntisWsClient {
+	
+	private JsonRpcHttpClient client;
+	private WebUntisService webUntisService;
+	
+	public UntisWsClient() throws MalformedURLException {
+		// TODO statische url
+		client = new JsonRpcHttpClient(new URL("http://example.com/UserService.json"));
+		webUntisService = ProxyUtil.createProxy(getClass().getClassLoader(), WebUntisService.class, client);
+		
+		
+		
+		
+	}
+	
 	public Collection<SchoolTeacher> getAllSchoolTeachers(){
 		// TODO call webuntis web service.
+		
+//		GetSchoolClassListRequest user = client.invoke("createUser", new Object[] { "bob", "the builder" }, User.class);
+		
+		webUntisService.getKlassen();
 		
 		Collection<SchoolTeacher> schoolTeacherCollection = new ArrayList<SchoolTeacher>();
 		
@@ -48,5 +71,13 @@ public class UntisWsClient {
 		schoolClassCollection.add(schoolClass2);
 		
 		return schoolClassCollection;
+	}
+	
+	public Collection<SchoolClass> getAllSchoolSubjects() {
+		return null;
+	}
+	
+	public Collection<SchoolClass> getAllSchoolRooms() {
+		return null;
 	}
 }

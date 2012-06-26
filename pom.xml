@@ -15,6 +15,9 @@
 		<junit.version>4.10</junit.version>
 		<jodatime.version>2.1</jodatime.version>
 		<mockito.version>1.9.0</mockito.version>
+		<webuntismodel.version>0.0.1-SNAPSHOT</webuntismodel.version>
+		<httpclient.version>4.2</httpclient.version>
+		<jsonrpc4j.version>0.23</jsonrpc4j.version>
 	</properties>
 
 	<dependencies>
@@ -108,9 +111,34 @@
 		<dependency>
 			<groupId>at.makubi.webuntis</groupId>
 			<artifactId>model</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${webuntismodel.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode</groupId>
+			<artifactId>jsonrpc4j</artifactId>
+			<version>${jsonrpc4j.version}</version>
 		</dependency>
 	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>coding4coffee</id>
+			<name>coding4coffee</name>
+			<url>http://nexus.coding4coffee.org/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>jsonrpc4j-webdav-maven-repo</id>
+			<name>jsonrpc4j maven repository</name>
+			<url>http://jsonrpc4j.googlecode.com/svn/maven/repo/</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+
 	<build>
 		<finalName>wuslng</finalName>
 		<plugins>

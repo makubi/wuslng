@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import at.makubi.webuntis.model.SchoolTeacher;
-import at.makubi.wuslng.UntisWsClient;
+import at.makubi.wuslng.untiswsclient.UntisWsClient;
 
 import com.sun.jersey.api.Responses;
 
