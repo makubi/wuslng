@@ -1,5 +1,7 @@
 package at.makubi.wuslng.services;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.ws.rs.GET;
@@ -9,6 +11,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,24 +34,31 @@ public class SchoolTeacherService {
 	@GET
 	@Path("all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<SchoolTeacher> getAllSchoolTeachersAsJson(){
-		return untisWsClient.getAllSchoolTeachers();
+	public Collection<SchoolTeacher> getAllSchoolTeachersAsJson() throws IllegalAccessException, InvocationTargetException{
+		Collection<SchoolTeacher> allSchoolTeacher = new ArrayList<SchoolTeacher>();
+		
+		for (at.makubi.wuslng.untiswsclient.jsonrpcmodel.SchoolTeacher jsonSchoolTeacher : untisWsClient.getAllSchoolTeachers()) {
+			BeanUtils.copyProperties(allSchoolTeacher, jsonSchoolTeacher);
+		}
+		
+		return allSchoolTeacher;
 	}
 	
 	@GET
 	@Path("/{schoolTeacherName}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSchoolTeacherByName(@PathParam("schoolTeacherName") String schoolTeacherName){
+	public Response getSchoolTeacherByName(@PathParam("schoolTeacherName") String schoolTeacherName) throws IllegalAccessException, InvocationTargetException{
 		SchoolTeacher responseData = null;
 		
-		for(SchoolTeacher teacher : untisWsClient.getAllSchoolTeachers()){
-			if(teacher.getName().equals(schoolTeacherName)){
-				responseData = teacher;
+		for(at.makubi.wuslng.untiswsclient.jsonrpcmodel.SchoolTeacher schoolTeacher : untisWsClient.getAllSchoolTeachers()){
+			if(schoolTeacher.getName().equals(schoolTeacherName)){
+				responseData = new SchoolTeacher();
+				BeanUtils.copyProperties(responseData, schoolTeacher);
 				break;
 			}
 		}
 		
-		return responseData != null ? Response.ok().entity(responseData).build() : Response.status(Responses.NOT_FOUND).entity("No teacher with name "+schoolTeacherName+" found").build();
+		return responseData != null ? Response.ok().entity(responseData).build() : Response.status(Responses.NOT_FOUND).entity("No class with name "+schoolTeacherName+" found").build();
 	}
 	
 }

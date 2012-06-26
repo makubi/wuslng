@@ -18,6 +18,7 @@
 		<webuntismodel.version>0.0.1-SNAPSHOT</webuntismodel.version>
 		<httpclient.version>4.2</httpclient.version>
 		<jsonrpc4j.version>0.23</jsonrpc4j.version>
+		<beanutils.version>1.8.3</beanutils.version>
 	</properties>
 
 	<dependencies>
@@ -122,6 +123,11 @@
 			<groupId>com.googlecode</groupId>
 			<artifactId>jsonrpc4j</artifactId>
 			<version>${jsonrpc4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${beanutils.version}</version>
 		</dependency>
 	</dependencies>
 

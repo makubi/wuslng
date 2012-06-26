@@ -1,8 +1,8 @@
 package at.makubi.wuslng.untiswsclient;
 
 import java.net.URL;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -32,7 +32,7 @@ public class UntisWsClientTest {
 		headers.put("Cookie", "JSESSIONID="+token.getSessionId());
 		
 		client.setHeaders(headers);
-		final List<SchoolClass> clazzes = webUntisService.getKlassen();
+		final Collection<SchoolClass> clazzes = webUntisService.getKlassen();
 		for (final SchoolClass schoolClass : clazzes) {
 			System.out.println(schoolClass.getName());
 		}
