@@ -38,7 +38,9 @@ public class SchoolClassService {
 		Collection<SchoolClass> allSchoolClasses = new ArrayList<SchoolClass>();
 		
 		for (at.makubi.wuslng.untiswsclient.jsonrpcmodel.SchoolClass jsonSchoolClass : untisWsClient.getAllSchoolClasses()) {
-			BeanUtils.copyProperties(allSchoolClasses, jsonSchoolClass);
+			SchoolClass schoolClass = new SchoolClass();
+			BeanUtils.copyProperties(schoolClass, jsonSchoolClass);
+			allSchoolClasses.add(schoolClass);
 		}
 		
 		return allSchoolClasses;

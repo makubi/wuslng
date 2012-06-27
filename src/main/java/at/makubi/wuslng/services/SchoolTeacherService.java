@@ -35,13 +35,15 @@ public class SchoolTeacherService {
 	@Path("all")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<SchoolTeacher> getAllSchoolTeachersAsJson() throws IllegalAccessException, InvocationTargetException{
-		Collection<SchoolTeacher> allSchoolTeacher = new ArrayList<SchoolTeacher>();
+		Collection<SchoolTeacher> allSchoolTeachers = new ArrayList<SchoolTeacher>();
 		
 		for (at.makubi.wuslng.untiswsclient.jsonrpcmodel.SchoolTeacher jsonSchoolTeacher : untisWsClient.getAllSchoolTeachers()) {
-			BeanUtils.copyProperties(allSchoolTeacher, jsonSchoolTeacher);
+			SchoolTeacher schoolTeacher = new SchoolTeacher();
+			BeanUtils.copyProperties(schoolTeacher, jsonSchoolTeacher);
+			allSchoolTeachers.add(schoolTeacher);
 		}
 		
-		return allSchoolTeacher;
+		return allSchoolTeachers;
 	}
 	
 	@GET
