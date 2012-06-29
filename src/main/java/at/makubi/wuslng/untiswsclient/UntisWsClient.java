@@ -3,6 +3,8 @@ package at.makubi.wuslng.untiswsclient;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
@@ -22,11 +24,17 @@ public class UntisWsClient {
 	
 	public UntisWsClient() throws MalformedURLException {
 		// TODO statische url
-		client = new JsonRpcHttpClient(new URL("http://example.com/UserService.json"));
+		client = new JsonRpcHttpClient(new URL("http://webuntis.grupet.at:8080/WebUntis/jsonrpc.do?school=demo"));
 		webUntisService = ProxyUtil.createProxy(getClass().getClassLoader(), WebUntisService.class, client);
+		AuthenticationToken authenticate = webUntisService.authenticate("user", "");
+		
+		Map<String, String> headers = new HashMap<String, String>();
+		headers.put("Cookie", "JSESSIONID="+authenticate.getSessionId());
+		
+		client.setHeaders(headers);
 	}
 	
-	public Collection<SchoolTeacher> getAllSchoolTeachers(){	
+	public Collection<SchoolTeacher> getAllSchoolTeachers(){
 		return webUntisService.getTeachers();
 	}
 
