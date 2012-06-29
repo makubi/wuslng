@@ -50,7 +50,7 @@ class SchoolTeacherServiceImpl implements SchoolTeacherService {
 			}
 		}
 		
-		return responseData != null ? Response.ok().entity(responseData).build() : Response.status(Responses.NOT_FOUND).entity("No class with name "+schoolTeacherName+" found").build();
+		return responseData != null ? Response.ok().entity(responseData).build() : Response.status(Responses.NOT_FOUND).entity("No teacher with name "+schoolTeacherName+" found").build();
 	}
 	
 }
