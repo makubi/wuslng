@@ -24,7 +24,7 @@ import com.sun.jersey.api.Responses;
 
 public class SchoolClassServiceTest {
 
-	private SchoolClassService schoolClassService;
+	private SchoolClassServiceImpl schoolClassService;
 	private UntisWsClient untisWsClientMock;
 	
 	private final Collection<SchoolClass> schoolClassCollection = new ArrayList<SchoolClass>();
@@ -46,7 +46,7 @@ public class SchoolClassServiceTest {
 	@Before
 	public void setUp() {
 		untisWsClientMock = mock(UntisWsClient.class);
-		schoolClassService = new SchoolClassService(untisWsClientMock);
+		schoolClassService = new SchoolClassServiceImpl(untisWsClientMock);
 		
 		setUpSchoolClassCollection();
 		setUpJSONSchoolClassCollection();

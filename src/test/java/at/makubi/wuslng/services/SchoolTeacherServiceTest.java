@@ -17,14 +17,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import at.makubi.webuntis.model.SchoolTeacher;
-import at.makubi.wuslng.services.SchoolTeacherService;
+import at.makubi.wuslng.services.SchoolTeacherServiceImpl;
 import at.makubi.wuslng.untiswsclient.UntisWsClient;
 
 import com.sun.jersey.api.Responses;
 
 public class SchoolTeacherServiceTest {
 
-	private SchoolTeacherService schoolTeacherService;
+	private SchoolTeacherServiceImpl schoolTeacherService;
 	private UntisWsClient untisWsClientMock;
 	
 	private final Collection<SchoolTeacher> schoolTeacherCollection = new ArrayList<SchoolTeacher>();
@@ -34,7 +34,7 @@ public class SchoolTeacherServiceTest {
 	@Before
 	public void setUp() {
 		untisWsClientMock = mock(UntisWsClient.class);
-		schoolTeacherService = new SchoolTeacherService(untisWsClientMock);
+		schoolTeacherService = new SchoolTeacherServiceImpl(untisWsClientMock);
 				
 		schoolTeacher1.setBackColor("" + 1);
 		schoolTeacher1.setForeColor("" + 1);

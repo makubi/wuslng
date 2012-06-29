@@ -26,12 +26,17 @@ public class UntisWsClient {
 		// TODO statische url
 		client = new JsonRpcHttpClient(new URL("http://webuntis.grupet.at:8080/WebUntis/jsonrpc.do?school=demo"));
 		webUntisService = ProxyUtil.createProxy(getClass().getClassLoader(), WebUntisService.class, client);
+	}
+	
+	public boolean authenticate() {
 		AuthenticationToken authenticate = webUntisService.authenticate("user", "");
 		
 		Map<String, String> headers = new HashMap<String, String>();
-		headers.put("Cookie", "JSESSIONID="+authenticate.getSessionId());
-		
+		String sessionId = authenticate.getSessionId();
+		headers.put("Cookie", "JSESSIONID="+sessionId);
 		client.setHeaders(headers);
+		
+		return sessionId != null;
 	}
 	
 	public Collection<SchoolTeacher> getAllSchoolTeachers(){
